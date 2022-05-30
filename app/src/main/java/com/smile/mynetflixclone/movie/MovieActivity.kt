@@ -1,8 +1,12 @@
-package com.smile.mynetflixclone
+package com.smile.mynetflixclone.movie
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.smile.mynetflixclone.R
+import com.smile.mynetflixclone.User
 import com.smile.mynetflixclone.databinding.ActivityMovieBinding
 
 class MovieActivity : AppCompatActivity() {
@@ -14,12 +18,13 @@ class MovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val user = intent.getParcelableExtra<User>(EXTRA_USER)
-        val username = user!!.username
-        binding.helloUser.text = "Hey! $username"
+        val nav = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        val navController = nav.navController
+        navController.setGraph(R.navigation.movie_navigation, intent.extras)
     }
 
     companion object {
         const val EXTRA_USER = "EXTRA_USER"
+        const val EXTRA_MOVIE = "EXTRA_MOVIE"
     }
 }

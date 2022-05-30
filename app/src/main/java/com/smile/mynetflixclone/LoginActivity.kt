@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.smile.mynetflixclone.databinding.ActivityLoginBinding
+import com.smile.mynetflixclone.movie.MovieActivity
 
 class LoginActivity : AppCompatActivity() {
 

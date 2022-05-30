@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNetflixClone">
         <activity
-            android:name=".MovieActivity"
+            android:name=".movie.MovieActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
