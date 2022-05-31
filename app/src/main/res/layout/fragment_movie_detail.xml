@@ -98,7 +98,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btnPlay" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -112,8 +112,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintStart_toStartOf="@+id/tvDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescription">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMyList"
