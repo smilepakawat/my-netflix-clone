@@ -1,4 +1,4 @@
-package com.smile.mynetflixclone
+package com.smile.mynetflixclone.login
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
