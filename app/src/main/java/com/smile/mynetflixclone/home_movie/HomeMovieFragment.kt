@@ -1,8 +1,6 @@
 package com.smile.mynetflixclone.home_movie
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +9,16 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.smile.mynetflixclone.R
-import com.smile.mynetflixclone.User
+import com.smile.mynetflixclone.data.MovieAPIFactory
+import com.smile.mynetflixclone.login.User
 import com.smile.mynetflixclone.databinding.FragmentHomeMovieBinding
 import com.smile.mynetflixclone.movie.Movie
 import com.smile.mynetflixclone.movie.MovieActivity
-import com.smile.mynetflixclone.movie.MovieDetailFragment
 
-class HomeMovieFragment : Fragment() {
+class HomeMovieFragment : Fragment(), HomeMoviePresenter.HomeMovieView {
 
     private val binding by lazy { FragmentHomeMovieBinding.inflate(layoutInflater) }
+    private val presenter by lazy { HomeMoviePresenter(MovieAPIFactory.createAPI()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +27,14 @@ class HomeMovieFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-        val movies = createMovie()
+        presenter.attachView(this)
+        presenter.fetchMovie()
+    }
+
+    override fun showMovies(movies: List<Movie>) {
         val user = arguments?.getParcelable<User>(MovieActivity.EXTRA_USER)
         val adapter = HomeMovieAdapter(movies) { movie ->
             findNavController().apply {
@@ -52,23 +55,5 @@ class HomeMovieFragment : Fragment() {
 
         binding.recycleView.layoutManager = layoutManager
         binding.recycleView.adapter = adapter
-    }
-
-    private fun createMovie() = listOf(
-        Movie(1, "Avenger Endgame", R.drawable.endgame, 120),
-        Movie(2, "Dr.Strange", R.drawable.strange, 130),
-        Movie(3, "Iron Man", R.drawable.tony, 125),
-        Movie(4, "Thor", R.drawable.thor, 120)
-    )
-
-    companion object {
-        @JvmStatic
-        fun newInstance(user: User?): HomeMovieFragment {
-            val fragment = HomeMovieFragment()
-            val bundle = Bundle()
-            bundle.putParcelable(MovieActivity.EXTRA_USER, user)
-            fragment.arguments = bundle
-            return fragment
-        }
     }
 }

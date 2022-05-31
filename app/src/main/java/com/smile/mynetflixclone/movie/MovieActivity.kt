@@ -3,10 +3,8 @@ package com.smile.mynetflixclone.movie
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.smile.mynetflixclone.R
-import com.smile.mynetflixclone.User
 import com.smile.mynetflixclone.databinding.ActivityMovieBinding
 
 class MovieActivity : AppCompatActivity() {

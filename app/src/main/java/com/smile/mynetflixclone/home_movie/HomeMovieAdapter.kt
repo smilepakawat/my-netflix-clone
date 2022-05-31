@@ -3,6 +3,9 @@ package com.smile.mynetflixclone.home_movie
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.smile.mynetflixclone.R
 import com.smile.mynetflixclone.databinding.MovieItemRowBinding
 import com.smile.mynetflixclone.movie.Movie
 
@@ -17,7 +20,11 @@ class HomeMovieAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie, onclickMovie: (Movie) -> Unit) {
-            binding.imageMovie.setImageResource(movie.image)
+            Glide.with(binding.imageMovie).load(movie.image)
+                .load(movie.image)
+                .error(R.drawable.endgame)
+                .transition(withCrossFade())
+                .into(binding.imageMovie)
             binding.tvMovieName.text = movie.name
             binding.root.setOnClickListener { onclickMovie(movie) }
         }
